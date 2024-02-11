@@ -43,3 +43,21 @@ class SQLManager:
 
 
 
+    def add_questions(self, quizz_id , description):
+        cursor = self.db.cursor()
+        cursor.execute("""
+        INSERT INTO Quizz(quizz_name,description) VALUES (?, ?)
+        """,[quizz_id,description])
+        cursor.close()
+        self.db.commit()
+
+
+    def select_quizzes(self):
+        cursor = self.db.cursor()
+        cursor.execute("""
+                    SELECT * FROM Quizz;
+        """)
+        records = cursor.fetchall()
+        cursor.close()
+        self.db.commit()
+        return records
